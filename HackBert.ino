@@ -69,8 +69,6 @@ void setup()
     // audio playing
     musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);  // DREQ int
 
-    musicPlayer.sineTest(0x44, 100);    // Make a tone to indicate VS1053 is working 
-
     // read the number of tracks in each folder
     for (byte i = 0; i < 10; i++)
     {
