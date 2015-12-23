@@ -330,8 +330,8 @@ byte getPressedButton()
     }
     else if (buttonsPinValue > 586)
     {
-        // button 3 has a value of about 614
-        pressedButton = 3;
+        // button 1 has a value of about 614
+        pressedButton = 1;
     }
     else if (buttonsPinValue > 535)
     {
@@ -340,8 +340,8 @@ byte getPressedButton()
     }
     else if (buttonsPinValue > 492)
     {
-        // button 1 has a value of about 512
-        pressedButton = 1;
+        // button 3 has a value of about 512
+        pressedButton = 3;
     }
     else if (buttonsPinValue > 450)
     {
@@ -350,7 +350,7 @@ byte getPressedButton()
     }
     else if (buttonsPinValue > 400)
     {
-        // button 8 has a value of about 427
+        // button 11 has a value of about 427
         pressedButton = 11;
     }
     else if (buttonsPinValue > 340)
@@ -360,8 +360,8 @@ byte getPressedButton()
     }
     else if (buttonsPinValue > 267)
     {
-        // button 9 has a value of about 307
-        pressedButton = 9;
+        // button 7 has a value of about 307
+        pressedButton = 7;
     }
     else if (buttonsPinValue > 178)
     {
@@ -370,8 +370,8 @@ byte getPressedButton()
     }
     else if (buttonsPinValue > 0)
     {
-        // button 7 has a value of about 128
-        pressedButton = 7;
+        // button 9 has a value of about 128
+        pressedButton = 9;
     }
     return pressedButton;
 }
