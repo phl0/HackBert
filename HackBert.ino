@@ -52,7 +52,7 @@ void setup()
   digitalWrite(13, LOW);
 
   // initialize serial communication at 9600 bits per second
-  // Serial.begin(9600);
+  Serial.begin(9600);
 
   // initialise the music player
   if (!musicPlayer.begin())
@@ -77,9 +77,9 @@ void setup()
     char filename[3];
     temp.toCharArray(filename, sizeof(filename));
     numberOfFiles[i] = countFiles(SD.open(filename));
-    //Serial.print(filename);
-    //Serial.print(": ");
-    //Serial.println(numberOfFiles[i]);
+    Serial.print(filename);
+    Serial.print(": ");
+    Serial.println(numberOfFiles[i]);
   }
 
   // read remembered track
@@ -161,9 +161,9 @@ void checkVolume()
     musicPlayer.setVolume(volumeState, 254);
 
     // print out the state of the volume
-    //Serial.print(volumePin);
-    //Serial.print(" volume ");
-    //Serial.println(volumeState);
+    Serial.print(volumePin);
+    Serial.print(" volume ");
+    Serial.println(volumeState);
   }
 }
 
@@ -178,8 +178,8 @@ void checkButtons()
   // if a button is pressed
   if (pressedButton != 0)
   {
-    //Serial.print("Taste: ");
-    //Serial.println(pressedButton);
+    Serial.print("Taste: ");
+    Serial.println(pressedButton);
 
     // if a track/play list button is pressed
     if (pressedButton < 10 && released)
@@ -223,7 +223,7 @@ void checkButtons()
         // increase play speed
         musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
         musicPlayer.sciWrite(VS1053_REG_WRAM, 3);
-        //Serial.println("increase speed");
+        Serial.println("increase speed");
       }
     }
 
@@ -282,8 +282,8 @@ void playCurrent()
     temp.toCharArray(filename, sizeof(filename));
     musicPlayer.startPlayingFile(filename);
 
-    //Serial.print("Play ");
-    //Serial.println(filename);
+    Serial.print("Play ");
+    Serial.println(filename);
   }
 }
 
