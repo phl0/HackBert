@@ -148,7 +148,7 @@ void checkVolume()
 
   // set the range of the volume from max=0 to min=254
   // (limit max volume to 20 and min to 60)
-  byte state = map(read, 0, 1023, 20, 60);
+  byte state = map(read, 0, 1023, 10, 90);
 
 
   // recognize state (volume) changes in steps of two
