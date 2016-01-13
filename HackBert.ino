@@ -163,7 +163,7 @@ void checkVolume()
     // print out the state of the volume
     Serial.print(volumePin);
     Serial.print(" volume ");
-    Serial.println(volumeState);
+    Serial.println(100-volumeState);
   }
 }
 
