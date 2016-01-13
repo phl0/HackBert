@@ -218,13 +218,14 @@ void checkButtons()
         }
         lastBackButtonTime = time;
       }
-      else if (pressedButton == 11 && released)
-      {
+      //else if (pressedButton == 11 && released)
+      //{
         // increase play speed
-        musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
-        musicPlayer.sciWrite(VS1053_REG_WRAM, 3);
-        Serial.println("increase speed");
-      }
+        //Serial.println("increase speed before");
+        //musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
+        //musicPlayer.sciWrite(VS1053_REG_WRAM, 2);
+        //Serial.println("increase speed");
+      //}
     }
 
     released = false;
@@ -237,6 +238,7 @@ void checkButtons()
     // reset play speed
     if (lastPressedButton == 11)
     {
+      Serial.println("normal speed");
       musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
       musicPlayer.sciWrite(VS1053_REG_WRAM, 1);
     }
