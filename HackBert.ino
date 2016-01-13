@@ -12,6 +12,9 @@ Adafruit_VS1053_FilePlayer musicPlayer =
 // VS1053 play speed parameter
 #define para_playSpeed 0x1E04
 
+// Enable or disable debugging via serial monitor here
+#define DEBUG        0
+
 // constants won't change
 
 // the number of the pin that is used for the pushbuttons
@@ -51,8 +54,10 @@ void setup()
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
 
+#if defined DEBUG
   // initialize serial communication at 9600 bits per second
   Serial.begin(9600);
+#endif
 
   // initialise the music player
   if (!musicPlayer.begin())
@@ -77,9 +82,11 @@ void setup()
     char filename[3];
     temp.toCharArray(filename, sizeof(filename));
     numberOfFiles[i] = countFiles(SD.open(filename));
+#if defined DEBUG
     Serial.print(filename);
     Serial.print(": ");
     Serial.println(numberOfFiles[i]);
+#endif
   }
 
   // read remembered track
@@ -161,9 +168,11 @@ void checkVolume()
     musicPlayer.setVolume(volumeState, 254);
 
     // print out the state of the volume
+#if defined DEBUG
     Serial.print(volumePin);
     Serial.print(" volume ");
     Serial.println(100-volumeState);
+#endif
   }
 }
 
@@ -178,8 +187,10 @@ void checkButtons()
   // if a button is pressed
   if (pressedButton != 0)
   {
+#if defined DEBUG
     Serial.print("Taste: ");
     Serial.println(pressedButton);
+#endif
 
     // if a track/play list button is pressed
     if (pressedButton < 10 && released)
@@ -243,7 +254,9 @@ void checkButtons()
     // reset play speed
     if (lastPressedButton == 11)
     {
+#if defined DEBUG
       Serial.println("normal speed");
+#endif
       musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
       musicPlayer.sciWrite(VS1053_REG_WRAM, 1);
     }
@@ -288,9 +301,10 @@ void playCurrent()
     char filename[temp.length() + 1];
     temp.toCharArray(filename, sizeof(filename));
     musicPlayer.startPlayingFile(filename);
-
+#if defined DEBUG
     Serial.print("Play ");
     Serial.println(filename);
+#endif
   }
 }
 
