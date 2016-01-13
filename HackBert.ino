@@ -327,32 +327,32 @@ byte getPressedButton()
   int buttonsPinValue = analogRead(buttonsPin);
   byte pressedButton = 0;
 
-  if (buttonsPinValue > 865 && buttonsPinValue < 885)
+  if (buttonsPinValue > 823)
   {
     // button 6 has a value of about 878
     pressedButton = 6;
   }
-  else if (buttonsPinValue > 760 && buttonsPinValue < 775)
+  else if (buttonsPinValue > 725)
   {
     // button 5 has a value of about 768
     pressedButton = 5;
   }
-  else if (buttonsPinValue > 675 && buttonsPinValue < 690)
+  else if (buttonsPinValue > 649)
   {
     // button 4 has a value of about 683
     pressedButton = 4;
   }
-  else if (buttonsPinValue > 600 && buttonsPinValue < 620)
+  else if (buttonsPinValue > 586)
   {
     // button 1 has a value of about 614
     pressedButton = 1;
   }
-  else if (buttonsPinValue > 550 && buttonsPinValue < 565)
+  else if (buttonsPinValue > 535)
   {
     // button 2 has a value of about 559
     pressedButton = 2;
   }
-  else if (buttonsPinValue > 500 && buttonsPinValue < 520)
+  else if (buttonsPinValue > 492)
   {
     // button 3 has a value of about 512
     pressedButton = 3;
@@ -362,27 +362,27 @@ byte getPressedButton()
     // if no button is pressed the value is of about 473
     pressedButton = 0;
   }
-  else if (buttonsPinValue > 410 && buttonsPinValue < 430)
+  else if (buttonsPinValue > 400)
   {
     // button 11 has a value of about 427
     pressedButton = 11;
   }
-  else if (buttonsPinValue > 360 && buttonsPinValue < 380)
+  else if (buttonsPinValue > 340)
   {
     // button 10 has a value of about 372
     pressedButton = 10;
   }
-  else if (buttonsPinValue > 290 && buttonsPinValue < 315)
+  else if (buttonsPinValue > 267)
   {
     // button 7 has a value of about 307
     pressedButton = 7;
   }
-  else if (buttonsPinValue > 220 && buttonsPinValue < 235)
+  else if (buttonsPinValue > 178)
   {
     // button 8 has a value of about 228
     pressedButton = 8;
   }
-  else if (buttonsPinValue > 120 && buttonsPinValue < 135)
+  else if (buttonsPinValue > 0)
   {
     // button 9 has a value of about 128
     pressedButton = 9;
