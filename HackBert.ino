@@ -237,11 +237,6 @@ void checkButtons()
         //musicPlayer.sciWrite(VS1053_REG_WRAM, 2);
         //Serial.println("increase speed");
       //}
-      if (pressedButton == 17 && released)
-      {
-        // Play all tracks in all folders one after another
-        musicPlayer.sineTest(0x44, 100);
-      }
     }
 
     released = false;
@@ -371,11 +366,6 @@ byte getPressedButton()
   {
     // button 11 has a value of about 427
     pressedButton = 11;
-  }
-  else if (buttonsPinValue > 430 && buttonsPinValue < 440)
-  {
-    //buttons 1 and 7 together result in a value of abt. 438
-    pressedButton = 17;
   }
   else if (buttonsPinValue > 360 && buttonsPinValue < 380)
   {
