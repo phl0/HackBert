@@ -239,6 +239,8 @@ void checkButtons()
       //}
       if (pressedButton == 17 && released)
       {
+        Serial.println("Stop Playing");
+        musicPlayer.stopPlaying();
         // Play all tracks in all folders one after another
         musicPlayer.sineTest(0x44, 100);
       }
