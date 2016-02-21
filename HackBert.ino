@@ -13,7 +13,7 @@ Adafruit_VS1053_FilePlayer musicPlayer =
 #define para_playSpeed 0x1E04
 
 // Enable or disable debugging via serial monitor here
-//#define DEBUG
+#define DEBUG
 
 // constants won't change
 
@@ -132,15 +132,6 @@ unsigned int countFiles(File dir)
 // the loop routine runs over and over again forever
 void loop()
 {
-  if (musicPlayer.stopped() && pressedButton == 11)
-  {
-#if defined DEBUG
-    Serial.println("Playlist Song gestoppt");
-#endif
-    currentFolder = 2;
-    playNext();
-  }
-
   // play next song if player stopped
   if (musicPlayer.stopped() && pressedButton != 11)
   {
