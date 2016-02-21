@@ -140,6 +140,7 @@ void loop()
     currentFolder = 2;
     playNext();
   }
+
   // play next song if player stopped
   if (musicPlayer.stopped() && pressedButton != 11)
   {
