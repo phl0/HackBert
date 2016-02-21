@@ -31,7 +31,7 @@ const int buttonPressedDelay = 1000;
 
 byte currentFolder = 1;
 unsigned int currentFile = 0;
-unsigned int numberOfFiles[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+unsigned int numberOfFiles[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 // the current volume level, set to min at start
 byte volumeState = 254;
@@ -45,7 +45,9 @@ byte lastReleasedButton = 0;
 // the time at the back button was pressed last time
 long lastBackButtonTime = 0;
 
-char currentTrackFileName[] = "/0/current.txt";
+char currentTrackFileName[] = "/current.txt";
+
+byte pressedButton = 0;
 
 // the setup routine runs once when you turn the device on or you press reset
 void setup()
@@ -130,12 +132,21 @@ unsigned int countFiles(File dir)
 // the loop routine runs over and over again forever
 void loop()
 {
+  if (musicPlayer.stopped() && pressedButton == 11)
+  {
+#if defined DEBUG
+    Serial.println("Playlist Song gestoppt");
+#endif
+    currentFolder = 2;
+    playNext();
+  }
+  
   // play next song if player stopped
-  if (musicPlayer.stopped())
+  if (musicPlayer.stopped() && pressedButton != 11)
   {
     playNext();
   }
-
+  
   // check the volume and set it
   checkVolume();
 
@@ -182,7 +193,7 @@ void checkVolume()
 void checkButtons()
 {
   // get the pressed button
-  byte pressedButton = getPressedButton();
+  pressedButton = getPressedButton();
 
   // if a button is pressed
   if (pressedButton != 0)
@@ -229,14 +240,14 @@ void checkButtons()
         }
         lastBackButtonTime = time;
       }
-      //else if (pressedButton == 11 && released)
-      //{
-        // increase play speed
-        //Serial.println("increase speed before");
-        //musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
-        //musicPlayer.sciWrite(VS1053_REG_WRAM, 2);
-        //Serial.println("increase speed");
-      //}
+      else if (pressedButton == 11 && released)
+      {
+        // play all tracks in all folders
+        musicPlayer.stopPlaying();
+        currentFolder = 1;
+        currentFile = 1;
+        playCurrent();
+      }
     }
 
     released = false;
