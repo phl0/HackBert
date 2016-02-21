@@ -13,7 +13,7 @@ Adafruit_VS1053_FilePlayer musicPlayer =
 #define para_playSpeed 0x1E04
 
 // Enable or disable debugging via serial monitor here
-//#define DEBUG
+#define DEBUG
 
 // constants won't change
 
@@ -256,16 +256,6 @@ void checkButtons()
   else
   {
     released = true;
-
-    // reset play speed
-    if (lastPressedButton == 11)
-    {
-#if defined DEBUG
-      Serial.println("normal speed");
-#endif
-      musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
-      musicPlayer.sciWrite(VS1053_REG_WRAM, 1);
-    }
   }
 
   // remember pressed button
