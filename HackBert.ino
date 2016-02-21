@@ -31,7 +31,7 @@ const int buttonPressedDelay = 1000;
 
 byte currentFolder = 1;
 unsigned int currentFile = 0;
-unsigned int numberOfFiles[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+unsigned int numberOfFiles[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 // the current volume level, set to min at start
 byte volumeState = 254;
@@ -75,7 +75,7 @@ void setup()
   musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);  // DREQ int
 
   // read the number of tracks in each folder
-  for (byte i = 1; i < 10; i++)
+  for (byte i = 0; i < 10; i++)
   {
     String temp = "/";
     temp.concat(i);
