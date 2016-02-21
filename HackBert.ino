@@ -75,7 +75,7 @@ void setup()
   musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);  // DREQ int
 
   // read the number of tracks in each folder
-  for (byte i = 0; i < 10; i++)
+  for (byte i = 1; i < 10; i++)
   {
     String temp = "/";
     temp.concat(i);
