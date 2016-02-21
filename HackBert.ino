@@ -13,7 +13,7 @@ Adafruit_VS1053_FilePlayer musicPlayer =
 #define para_playSpeed 0x1E04
 
 // Enable or disable debugging via serial monitor here
-#define DEBUG
+//#define DEBUG
 
 // constants won't change
 
