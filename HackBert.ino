@@ -45,7 +45,7 @@ byte lastReleasedButton = 0;
 // the time at the back button was pressed last time
 long lastBackButtonTime = 0;
 
-char currentTrackFileName[] = "/0/current.txt";
+char currentTrackFileName[] = "/current.txt";
 
 // the setup routine runs once when you turn the device on or you press reset
 void setup()
