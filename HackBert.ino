@@ -31,7 +31,7 @@ const int buttonPressedDelay = 1000;
 
 byte currentFolder = 1;
 unsigned int currentFile = 0;
-unsigned int numberOfFiles[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+unsigned int numberOfFiles[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 // the current volume level, set to min at start
 byte volumeState = 254;
