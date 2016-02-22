@@ -77,7 +77,7 @@ void setup()
   musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);  // DREQ int
 
   // read the number of tracks in each folder
-  for (byte i = 0; i < 10; i++)
+  for (byte i = 1; i < 10; i++)
   {
     String temp = "/";
     temp.concat(i);
@@ -102,7 +102,6 @@ void setup()
     }
     file.close();
   }
-
 
   delay(100); // init delay
 }
@@ -243,14 +242,14 @@ void checkButtons()
 
     released = false;
     lastReleasedButton = pressedButton;
+
+    // remember pressed button
+    lastPressedButton = pressedButton;
   }
   else
   {
     released = true;
   }
-
-  // remember pressed button
-  lastPressedButton = pressedButton;
 }
 
 
@@ -267,7 +266,16 @@ void playPrevious()
 void playNext()
 {
   currentFile++;
-  if (currentFile > numberOfFiles[currentFolder])
+  if (currentFile > numberOfFiles[currentFolder] && lastPressedButton == 11)
+  {
+    currentFolder++;
+    if (currentFolder == 10)
+    {
+      currentFolder = 1;
+    }
+    currentFile = 1;
+  }
+  else if (currentFile > numberOfFiles[currentFolder])
   {
     currentFile = 1;
   }
