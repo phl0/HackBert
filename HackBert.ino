@@ -265,6 +265,7 @@ void playPrevious()
 
 void playNext()
 {
+  musicPlayer.stopPlaying();
   currentFile++;
   if (currentFile > numberOfFiles[currentFolder] && lastPressedButton == 11)
   {
