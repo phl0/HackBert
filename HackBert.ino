@@ -45,7 +45,9 @@ byte lastReleasedButton = 0;
 // the time at the back button was pressed last time
 long lastBackButtonTime = 0;
 
-char currentTrackFileName[] = "/0/current.txt";
+char currentTrackFileName[] = "/current.txt";
+
+byte pressedButton = 0;
 
 // the setup routine runs once when you turn the device on or you press reset
 void setup()
@@ -56,7 +58,7 @@ void setup()
 
 #if defined DEBUG
   // initialize serial communication at 9600 bits per second
-  Serial.begin(9600);
+  Serial.begin(115200);
 #endif
 
   // initialise the music player
@@ -75,7 +77,7 @@ void setup()
   musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);  // DREQ int
 
   // read the number of tracks in each folder
-  for (byte i = 0; i < 10; i++)
+  for (byte i = 1; i < 10; i++)
   {
     String temp = "/";
     temp.concat(i);
@@ -100,7 +102,6 @@ void setup()
     }
     file.close();
   }
-
 
   delay(100); // init delay
 }
@@ -131,11 +132,11 @@ unsigned int countFiles(File dir)
 void loop()
 {
   // play next song if player stopped
-  if (musicPlayer.stopped())
+  if (musicPlayer.stopped() && pressedButton != 11)
   {
     playNext();
   }
-
+  
   // check the volume and set it
   checkVolume();
 
@@ -182,7 +183,7 @@ void checkVolume()
 void checkButtons()
 {
   // get the pressed button
-  byte pressedButton = getPressedButton();
+  pressedButton = getPressedButton();
 
   // if a button is pressed
   if (pressedButton != 0)
@@ -229,36 +230,26 @@ void checkButtons()
         }
         lastBackButtonTime = time;
       }
-      //else if (pressedButton == 11 && released)
-      //{
-        // increase play speed
-        //Serial.println("increase speed before");
-        //musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
-        //musicPlayer.sciWrite(VS1053_REG_WRAM, 2);
-        //Serial.println("increase speed");
-      //}
+      else if (pressedButton == 11 && released)
+      {
+        // play all tracks in all folders
+        musicPlayer.stopPlaying();
+        currentFolder = 1;
+        currentFile = 1;
+        playCurrent();
+      }
     }
 
     released = false;
     lastReleasedButton = pressedButton;
+
+    // remember pressed button
+    lastPressedButton = pressedButton;
   }
   else
   {
     released = true;
-
-    // reset play speed
-    if (lastPressedButton == 11)
-    {
-#if defined DEBUG
-      Serial.println("normal speed");
-#endif
-      musicPlayer.sciWrite(VS1053_REG_WRAMADDR, para_playSpeed);
-      musicPlayer.sciWrite(VS1053_REG_WRAM, 1);
-    }
   }
-
-  // remember pressed button
-  lastPressedButton = pressedButton;
 }
 
 
@@ -274,8 +265,18 @@ void playPrevious()
 
 void playNext()
 {
+  musicPlayer.stopPlaying();
   currentFile++;
-  if (currentFile > numberOfFiles[currentFolder])
+  if (currentFile > numberOfFiles[currentFolder] && lastPressedButton == 11)
+  {
+    currentFolder++;
+    if (currentFolder == 10)
+    {
+      currentFolder = 1;
+    }
+    currentFile = 1;
+  }
+  else if (currentFile > numberOfFiles[currentFolder])
   {
     currentFile = 1;
   }
