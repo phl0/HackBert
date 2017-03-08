@@ -7,7 +7,13 @@ echo "Converting input files"
 cd ${SOURCE}
 for i in {1..9}; do
    cd $i
-   j=1; for file in *.mp3; do sox "$file" -c 1 -e signed-integer -r 22050 -b 16 "$j.wav"; j=`echo "$j + 1" | bc`; done; rm -f *.mp3
+   j=1;
+   for file in *.mp3; do
+      sox "$file" -c 1 -e signed-integer -r 22050 -b 16 "$j.wav"
+      echo "$j: $file" >> toc.txt
+      j=`echo "$j + 1" | bc`
+   done;
+   rm -f *.mp3
    cd ..
 done
 
